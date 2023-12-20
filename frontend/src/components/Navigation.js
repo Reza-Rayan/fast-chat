@@ -56,7 +56,7 @@ function Navigation() {
                             aria-expanded={open ? 'true' : undefined}
                             onClick={handleClick}
                         >
-                            <img src={user.picture} width={40} height={40} className='rounded-full' />
+                            <img src={user?.picture} width={40} height={40} className='rounded-full' />
                             <span className='ml-1 text-slate-500'>
                                 {user.name}
                             </span>

@@ -5,6 +5,8 @@ import { AppContext } from "../context/appContext";
 import { addNotifications, resetNotifications } from "../features/userSlice";
 import "./Sidebar.css";
 
+import {List ,ListItem ,ListItemButton ,ListItemText ,Divider ,Box,Badge  } from "@mui/material"
+
 function Sidebar() {
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -65,16 +67,18 @@ function Sidebar() {
         return <></>;
     }
     return (
-        <>
-            <h2>Available rooms</h2>
-            <ListGroup>
+        <aside className="py-6 px-2">
+            <h2 className="font-semibold text-slate-700">Available rooms</h2>
+            <List className="bg-slate-700 text-white">
                 {rooms.map((room, idx) => (
-                    <ListGroup.Item key={idx} onClick={() => joinRoom(room)} active={room == currentRoom} style={{ cursor: "pointer", display: "flex", justifyContent: "space-between" }}>
-                        {room} {currentRoom !== room && <span className="badge rounded-pill bg-primary">{user.newMessages[room]}</span>}
-                    </ListGroup.Item>
+                    <ListItem key={idx} onClick={() => joinRoom(room)} active={room == currentRoom}
+                    className="cursor-pointer flex justify-between border-b w-[80px]">
+                        {room} {currentRoom !== room && <Badge className="rounded-full p-2" color="primary">{user.newMessages[room]}</Badge>}
+                    </ListItem>
                 ))}
-            </ListGroup>
-            <h2>Members</h2>
+            </List>
+            <h2 className="font-semibold text-slate-700 mt-5"> Friends</h2>
+
             {members.map((member) => (
                 <ListGroup.Item key={member.id} style={{ cursor: "pointer" }} active={privateMemberMsg?._id == member?._id} onClick={() => handlePrivateMemberMsg(member)} disabled={member._id === user._id}>
                     <Row>
@@ -93,7 +97,7 @@ function Sidebar() {
                     </Row>
                 </ListGroup.Item>
             ))}
-        </>
+        </aside>
     );
 }
 

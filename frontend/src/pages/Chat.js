@@ -1,20 +1,20 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+
 import Sidebar from "../components/Sidebar";
 import MessageForm from "../components/MessageForm";
 
 function Chat() {
     return (
-        <Container>
-            <Row>
-                <Col md={4}>
+        <main >
+            <div className="grid grid-cols-12 mx-20 mt-2 gap-2">
+                <div className="col-span-3">
                     <Sidebar />
-                </Col>
-                <Col md={8}>
+                </div>
+                <div className="col-span-9">
                     <MessageForm />
-                </Col>
-            </Row>
-        </Container>
+                </div>
+            </div>
+        </main>
     );
 }
 
