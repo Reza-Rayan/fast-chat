@@ -75,22 +75,18 @@ const Signup = () => {
       try {
         const response = await dispatch(signup(values, avatar));
 
-        if (response && response.status === "success") {
-          // Show success message in the MUI Snackbar
+        if (response && response.meta.requestStatus === "rejected") {
+          setSnackbarMessage("This Email Already Exists");
+          setSnackbarOpen(true);
+        } else {
           setSuccessSnackbarMessage("Registration completed successfully!");
           setSuccessSnackbarOpen(true);
-        } else {
-          // Handle registration failure (if needed)
-          const errorMessage =
-            response && response.error
-              ? response.error
-              : "Registration failed. Please try again.";
+          setTimeout(() => {
+            router.push("/chat");
+          }, 3000);
         }
-        setSnackbarMessage(errorMessage);
-        setSnackbarOpen(true);
       } catch (error) {
         console.error(error);
-        // Show a generic error message in the MUI Snackbar
         setSnackbarMessage("This Email Already Exists");
         setSnackbarOpen(true);
       }
@@ -126,9 +122,6 @@ const Signup = () => {
   // Snackbar Close Handler Fn
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
-  };
-  const handleSuccessSnackbarClose = () => {
-    setSuccessSnackbarOpen(false);
   };
 
   return (

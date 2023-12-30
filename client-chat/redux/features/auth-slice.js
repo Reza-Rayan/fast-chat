@@ -8,7 +8,6 @@ export const login = createAsyncThunk("auth/login", async (body) => {
     const response = await axios.post(`${BaseURL}/users/login`, body);
 
     // Use response.data directly
-    console.log("USER SLICER", response.data);
     return response.data;
   } catch (error) {
     throw error;
@@ -19,17 +18,6 @@ export const login = createAsyncThunk("auth/login", async (body) => {
 export const signup = createAsyncThunk("auth/signup", async (body) => {
   try {
     const response = await axios.post(`${BaseURL}/users`, body);
-    const { result } = response.data; // Adjust this based on your API response structure
-
-    if (result === "success") {
-      // Show success message
-      enqueueSnackbar("Registration completed successfully!", {
-        variant: "success",
-      });
-    } else {
-      // Handle registration failure (optional)
-      console.error("Registration failed");
-    }
 
     return response.data;
   } catch (error) {

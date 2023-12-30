@@ -5,7 +5,6 @@ const User = require("../models/User");
 router.post("/", async (req, res) => {
   try {
     const { username, email, password, avatar, phoneNumber } = req.body;
-    console.log(req.body);
     const user = await User.create({
       username,
       email,
@@ -13,16 +12,17 @@ router.post("/", async (req, res) => {
       avatar,
       phoneNumber,
     });
-    res.status(201).json(user);
+    res.status(201).json({ status: "success", user });
   } catch (e) {
     let msg;
     if (e.code == 11000) {
       msg = "User already exists";
+      res.status(401).json({ status: "failure", message: msg });
     } else {
       msg = e.message;
+      console.log(e);
+      res.status(400).json({ status: "failure", message: msg });
     }
-    console.log(e);
-    res.status(400).json(msg);
   }
 });
 
