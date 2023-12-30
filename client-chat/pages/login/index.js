@@ -43,13 +43,18 @@ const Login = () => {
     onSubmit: async (values) => {
       try {
         // Handle form submission
-        await dispatch(login(values));
-        // Show success Snackbar
-        setSuccessSnackbarMessage("Registration completed successfully!");
-        setSuccessSnackbarOpen(true);
-        setTimeout(() => {
-          router.push("/chat");
-        }, 2000);
+        const response = await dispatch(login(values));
+        console.log("RESPONSE", response);
+        if (response && response.meta.requestStatus === "rejected") {
+          alert("email or password is wrong");
+        } else {
+          // Show success Snackbar
+          setSuccessSnackbarMessage("Registration completed successfully!");
+          setSuccessSnackbarOpen(true);
+          setTimeout(() => {
+            router.push("/chat");
+          }, 2000);
+        }
       } catch (error) {
         console.error("Login failed:", error);
       }
@@ -57,9 +62,6 @@ const Login = () => {
   });
 
   // Snackbar Close Handler Fn
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
-  };
   const handleSuccessSnackbarClose = () => {
     setSuccessSnackbarOpen(false);
   };
