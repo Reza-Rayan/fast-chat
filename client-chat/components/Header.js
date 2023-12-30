@@ -18,11 +18,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ForumIcon from "@mui/icons-material/Forum";
 
 const pages = ["Login", "Register", "Chat"];
-const settings = ["Profile", "Account", "Chat", "Logout"];
+
+// Redux Handler
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser, logout } from "@/redux/features/auth-slice";
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,6 +44,12 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  // Logout Fn
+  const logoutHandler = async () => {
+    await dispatch(logout(user));
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -136,35 +148,50 @@ const Header = () => {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Avatar" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          {user && (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Avatar" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <>
+                  <MenuItem>
+                    <Link href={"/chat"}>Chat</Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography
+                      textAlign="center"
+                      onClick={() => logoutHandler()}
+                    >
+                      Logout
+                    </Typography>
+                  </MenuItem>
+                </>
+              </Menu>
+            </Box>
+          )}
+          {!user && (
+            <Button variant="outlined" className="text-white border-white">
+              <Link href={"/login"}>login</Link>
+            </Button>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

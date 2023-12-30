@@ -6,7 +6,7 @@ import axios from "axios";
 export const login = createAsyncThunk("auth/login", async (body) => {
   try {
     const response = await axios.post(`${BaseURL}/users/login`, body);
-
+    localStorage.setItem("token", response.data.token);
     // Use response.data directly
     return response.data;
   } catch (error) {
@@ -15,10 +15,30 @@ export const login = createAsyncThunk("auth/login", async (body) => {
 });
 
 // Define an asynchronous thunk for handling signup
-export const signup = createAsyncThunk("auth/signup", async (body) => {
-  try {
-    const response = await axios.post(`${BaseURL}/users`, body);
+export const signup = createAsyncThunk(
+  "auth/signup",
+  async (body, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().user.token;
 
+      const response = await axios.post(`${BaseURL}/users`, body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+// Define an asynchronous thunk for handling logout
+export const logout = createAsyncThunk("auth/logout", async (body) => {
+  try {
+    localStorage.removeItem("token");
+    const response = await axios.post(`${BaseURL}/users/logout`, body);
     return response.data;
   } catch (error) {
     throw error;
@@ -26,7 +46,7 @@ export const signup = createAsyncThunk("auth/signup", async (body) => {
 });
 
 const initialState = {
-  user: null,
+  username: null,
   status: "idle",
   error: null,
 };
@@ -36,8 +56,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     logOut: (state) => {
-      state.user = null;
-      state.status = "idle";
+      state.username = null;
       state.error = null;
     },
   },
@@ -64,13 +83,26 @@ export const authSlice = createSlice({
       .addCase(signup.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      // Logout Extra Reducers
+      .addCase(logout.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.user = null;
+        state.status = "idle";
+        state.error = null;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
 
-export const { logOut } = authSlice.actions;
-
 // Add selectUser selector
 export const selectUser = (state) => state.user;
+
+export const { logOut } = authSlice.actions;
 
 export default authSlice.reducer;
