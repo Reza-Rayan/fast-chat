@@ -48,11 +48,12 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findByCredentials(email, password);
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "3 days",
     });
+    const expireTime = Date.now();
     user.status = "online";
     await user.save();
-    res.status(200).json({ status: "success", user, token });
+    res.status(200).json({ status: "success", user, token, expireTime });
   } catch (e) {
     res
       .status(401)
