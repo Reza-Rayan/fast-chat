@@ -44,7 +44,6 @@ const Login = () => {
       try {
         // Handle form submission
         const response = await dispatch(login(values));
-        console.log("RESPONSE", response);
         if (response && response.meta.requestStatus === "rejected") {
           alert("email or password is wrong");
         } else {

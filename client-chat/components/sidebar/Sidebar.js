@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useState, useContext, useEffect } from "react";
 // MUI Components
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -15,36 +14,24 @@ import {
 // Redux Imports
 import { useSelector, useDispatch } from "react-redux";
 import { AppContext } from "@/context/appContext";
-import { selectUser } from "@/redux/features/auth-slice";
+import {
+  selectUser,
+  resetNotifications,
+  addNotifications,
+} from "@/redux/features/auth-slice";
 
 const settings = ["Profile", "Account", "Chat", "Logout"];
 
-=======
-import { useState } from "react";
-// MUI Components
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import SearchIcon from "@mui/icons-material/Search";
-import { Menu, MenuItem, Typography, Avatar, IconButton } from "@mui/material";
-
-const settings = ["Profile", "Account", "Chat", "Logout"];
-
-const rooms = [
-  { id: 1, title: "Nitrogen Co" },
-  { id: 2, title: "Private Group" },
-];
->>>>>>> 3916f12a602b6e148e7127626ca4ac4b9a4c5633
-const friends = [
-  { id: 1, name: "Maziar" },
-  { id: 2, name: "Mohammad" },
-];
+// const friends = [
+//   { id: 1, name: "Maziar" },
+//   { id: 2, name: "Mohammad" },
+// ];
 
 const Sidebar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-<<<<<<< HEAD
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  console.log("USER", user);
   const {
     socket,
     setMembers,
@@ -57,15 +44,12 @@ const Sidebar = () => {
     currentRoom,
   } = useContext(AppContext);
 
-=======
->>>>>>> 3916f12a602b6e148e7127626ca4ac4b9a4c5633
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-<<<<<<< HEAD
 
   function joinRoom(room, isPublic = true) {
     if (!user) {
@@ -126,15 +110,12 @@ const Sidebar = () => {
     );
   }
 
-=======
->>>>>>> 3916f12a602b6e148e7127626ca4ac4b9a4c5633
   return (
     <aside className="relative h-full">
       <section>
         <div>
-          <h2 className="px-4 py-2 font-bold text-slate-600">Groups</h2>
+          <h2 className="px-4 py-2 font-bold bg-slate-900 text-white">Groups</h2>
           <ul>
-<<<<<<< HEAD
             {rooms.map((room, index) => (
               <li
                 key={index}
@@ -155,52 +136,29 @@ const Sidebar = () => {
                 </div>
               </li>
             ))}
-            {/* {!rooms ? "" : <div>There is no group</div>} */}
-=======
-            {rooms.map((room) => {
-              return (
-                <div className="bg-slate-50">
-                  <li
-                    key={room.id}
-                    className="px-4 py-3 border-b flex gap-3 items-center transition-all hover:bg-slate-500 hover:text-white"
-                  >
-                    <IconButton sx={{ p: 0 }}>
-                      <Avatar alt="Avatar" className="w-6 h-6" />
-                    </IconButton>
-                    <span className=" font-semibold text-sm">{room.title}</span>
-                  </li>
-                </div>
-              );
-            })}
->>>>>>> 3916f12a602b6e148e7127626ca4ac4b9a4c5633
           </ul>
         </div>
 
         <div>
-          <h2 className="px-4 py-2 font-bold text-slate-600">
+          <h2 className="px-4 py-2 font-bold  bg-slate-900 text-white">
             Talk to Friends
           </h2>
           <ul>
-<<<<<<< HEAD
             {members.map((friend) => {
-=======
-            {friends.map((friend) => {
->>>>>>> 3916f12a602b6e148e7127626ca4ac4b9a4c5633
               return (
                 <div className="bg-slate-50">
                   <li
                     key={friend.id}
-<<<<<<< HEAD
                     className="px-4 py-3 border-b flex gap-3 items-center transition-all hover:bg-slate-500 hover:text-white cursor-pointer hover:rounded-xl"
-=======
-                    className="px-4 py-3 border-b flex gap-3 items-center transition-all hover:bg-slate-500 hover:text-white"
->>>>>>> 3916f12a602b6e148e7127626ca4ac4b9a4c5633
+                    active={privateMemberMsg?._id == friend?._id}
+                    onClick={() => handlePrivateMemberMsg(friend)}
+                    disabled={friend._id === user._id}
                   >
                     <IconButton sx={{ p: 0 }}>
                       <Avatar alt="Avatar" className="w-6 h-6" />
                     </IconButton>
                     <span className=" font-semibold text-sm">
-                      {friend.name}
+                      {friend.username}
                     </span>
                   </li>
                 </div>
