@@ -1,33 +1,18 @@
-import { useFormik } from "formik";
-
-// MUI Components
+import React from "react";
 import { TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
-const ChatFrom = () => {
-  // Form Handler Fn
-  const formik = useFormik({
-    initialValues: {
-      message: "",
-    },
-    onSubmit: (values, { resetForm }) => {
-      // Handle form submission here
-      console.log("Form submitted with values:", values);
-      // Reset the form after submission
-      resetForm();
-    },
-  });
-
+const ChatForm = ({ handleSubmit, setMessage, message }) => {
   return (
-    <form onSubmit={formik.handleSubmit} className="flex  pl-6 pb-2">
+    <form onSubmit={handleSubmit} className="flex pl-6 pb-2">
       <TextField
         id="outlined-basic"
-        label="type your message ..."
+        label="Type your message..."
         variant="outlined"
         fullWidth
         name="message"
-        value={formik.values.message}
-        onChange={formik.handleChange}
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
       />
       <Button type="submit">
         <SendIcon />
@@ -36,4 +21,4 @@ const ChatFrom = () => {
   );
 };
 
-export default ChatFrom;
+export default ChatForm;
