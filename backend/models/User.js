@@ -34,6 +34,12 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "online",
     },
+    friends: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   { minimize: false }
 );

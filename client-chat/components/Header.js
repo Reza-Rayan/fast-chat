@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 // MUI Components
 import {
   AppBar,
@@ -47,7 +48,7 @@ const Header = () => {
 
   // Logout Fn
   const logoutHandler = async () => {
-    await dispatch(logout(user));
+    await dispatch(logout());
   };
 
   return (
@@ -152,7 +153,12 @@ const Header = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Avatar" />
+                  <img
+                    src={user?.avatar}
+                    width={50}
+                    height={50}
+                    className="rounded-full"
+                  />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -176,10 +182,7 @@ const Header = () => {
                     <Link href={"/chat"}>Chat</Link>
                   </MenuItem>
                   <MenuItem>
-                    <Typography
-                      textAlign="center"
-                      onClick={() => logoutHandler()}
-                    >
+                    <Typography textAlign="center" onClick={logoutHandler}>
                       Logout
                     </Typography>
                   </MenuItem>

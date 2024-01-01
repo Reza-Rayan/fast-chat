@@ -62,6 +62,28 @@ const Signup = () => {
     password: yup.string().required("Password is required"),
   });
 
+  const uploadImage = async (file) => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "dumhym99");
+
+    try {
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/dtd7mbljp/image/upload",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+
+      const result = await response.json();
+      return result.secure_url;
+    } catch (error) {
+      console.error("Error uploading image to Cloudinary:", error);
+      throw error;
+    }
+  };
+
   //   Form Handler Fn
   const formik = useFormik({
     initialValues: {
@@ -73,7 +95,9 @@ const Signup = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        const response = await dispatch(signup(values, avatar));
+        const imageUrl = await uploadImage(avatar);
+
+        const response = await dispatch(signup({ ...values, avatar: imageUrl }));
 
         if (response && response.meta.requestStatus === "rejected") {
           setSnackbarMessage("This Email Already Exists");

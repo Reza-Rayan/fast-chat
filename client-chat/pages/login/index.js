@@ -71,7 +71,7 @@ const Login = () => {
         <title>Login Page | Fast Chat</title>
       </Head>
       <main className="flex flex-col min-h-[700px] items-center justify-center">
-        <Image src={LogoImg} width={80} />
+        <Image src={LogoImg} width={80} alt="fat chat" />
         <div className="flex gap-4 items-center">
           <Typography
             variant="h1"
