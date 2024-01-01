@@ -48,7 +48,11 @@ const Header = () => {
 
   // Logout Fn
   const logoutHandler = async () => {
+<<<<<<< HEAD
     await dispatch(logout());
+=======
+    await dispatch(logout(user));
+>>>>>>> 3916f12a602b6e148e7127626ca4ac4b9a4c5633
   };
 
   return (
@@ -153,12 +157,16 @@ const Header = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+<<<<<<< HEAD
                   <img
                     src={user?.avatar}
                     width={50}
                     height={50}
                     className="rounded-full"
                   />
+=======
+                  <Avatar alt="Avatar" />
+>>>>>>> 3916f12a602b6e148e7127626ca4ac4b9a4c5633
                 </IconButton>
               </Tooltip>
               <Menu
@@ -182,7 +190,14 @@ const Header = () => {
                     <Link href={"/chat"}>Chat</Link>
                   </MenuItem>
                   <MenuItem>
+<<<<<<< HEAD
                     <Typography textAlign="center" onClick={logoutHandler}>
+=======
+                    <Typography
+                      textAlign="center"
+                      onClick={() => logoutHandler()}
+                    >
+>>>>>>> 3916f12a602b6e148e7127626ca4ac4b9a4c5633
                       Logout
                     </Typography>
                   </MenuItem>
