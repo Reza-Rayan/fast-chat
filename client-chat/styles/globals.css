@@ -5,25 +5,40 @@
 
 
 body {
-    background-color: #ffffff;
-    min-height: 100vh !important;
+  background-color: #ffffff;
+  min-height: 100vh !important;
 }
 
 ::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
+
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
+  background: #f1f1f1;
+}
 
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
-  }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
 
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@font-face {
+  font-family: 'vazirmatn';
+  src: url('/public/fonts/fa-vazi/Vazir.woff');
+  src: url('/public/fonts/fa-vazi/Vazir.woff2');
+}
+
+body {
+  font-family: 'Tahoma', 'vazirmatn' !important;
+}
+
+input {
+  font-family: 'Tahoma', 'vazirmatn' !important;
+}
