@@ -57,9 +57,8 @@ const Messages = () => {
 
   return (
     <div
-      className="border
-    flex flex-col justify-between
-    lg:min-h-[700px]  bg-slate-200 text-white rounded-lg w-full"
+      className="flex flex-col justify-between
+    lg:min-h-[700px]  bg-slate-100 text-white rounded-lg w-full"
     >
       <div className="messages-output">
         {user && privateMemberMsg?._id && <></>}
