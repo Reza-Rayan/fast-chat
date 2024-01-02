@@ -20,9 +20,16 @@ const SingleMessage = ({ avatar, _id, content, username, time, user }) => {
             />
           </div>
         </div>
-        <p className="message-sender text-slate-600 font-medium">{isCurrentUser ? "You" : username}</p>
+        <div className="flex gap-2 items-center">
+          <span className="text-slate-500 text-[10px]">{time}</span>
+          <p className="message-sender text-slate-600 text-sm font-medium">
+            {isCurrentUser ? "You" : username}
+          </p>
+        </div>
 
-        <div className="chat-bubble">{content}</div>
+        <div className="chat-bubble  text-white text-sm flex items-center">
+          {content}
+        </div>
       </div>
     </>
   );

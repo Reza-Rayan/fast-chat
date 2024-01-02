@@ -108,7 +108,7 @@ const Signup = () => {
           setSuccessSnackbarMessage("Registration completed successfully!");
           setSuccessSnackbarOpen(true);
           setTimeout(() => {
-            router.push("/chat");
+            router.push("/login");
           }, 3000);
         }
       } catch (error) {

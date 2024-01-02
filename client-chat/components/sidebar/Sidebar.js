@@ -22,11 +22,6 @@ import {
 
 const settings = ["Profile", "Account", "Chat", "Logout"];
 
-// const friends = [
-//   { id: 1, name: "Maziar" },
-//   { id: 2, name: "Mohammad" },
-// ];
-
 const Sidebar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -104,28 +99,30 @@ const Sidebar = () => {
 
   if (!user) {
     return (
-      <div className="text-center flex items-center h-full justify-center font-bold text-2xl text-slate-300">
+      <div className="text-center flex items-center h-full justify-center font-bold text-2xl text-slate-300 bg-slate-800">
         Not any user
       </div>
     );
   }
 
   return (
-    <aside className="relative h-full">
+    <aside className="relative h-full bg-white">
       <section>
         <div>
-          <h2 className="px-4 py-2 font-bold bg-slate-900 text-white">Groups</h2>
+          <h2 className="px-4 py-2 font-bold text-white bg-slate-900">
+            Groups
+          </h2>
           <ul>
             {rooms.map((room, index) => (
               <li
                 key={index}
-                className="px-4 py-3 border-b flex gap-3 items-center transition-all hover:bg-slate-500 hover:text-white cursor-pointer hover:rounded-xl hover:scale-105 overflow-hidden"
+                className="px-4 py-3 border-b flex gap-3 text-slate-600 items-center transition-all hover:bg-slate-500 hover:text-white cursor-pointer hover:rounded-xl hover:scale-105 overflow-hidden"
               >
                 <IconButton sx={{ p: 0 }}>
                   <Avatar alt="Avatar" className="w-6 h-6" />
                 </IconButton>
                 <div>
-                  <span className=" font-semibold text-sm">
+                  <span className=" font-semibold text-sm ">
                     {room}{" "}
                     {currentRoom !== room && (
                       <Badge className="rounded-full p-2" color="primary">
@@ -140,7 +137,7 @@ const Sidebar = () => {
         </div>
 
         <div>
-          <h2 className="px-4 py-2 font-bold  bg-slate-900 text-white">
+          <h2 className="px-4 py-2 font-bold  bg-gray-900 text-white">
             Talk to Friends
           </h2>
           <ul>
@@ -149,7 +146,9 @@ const Sidebar = () => {
                 <div className="bg-slate-50">
                   <li
                     key={friend.id}
-                    className="px-4 py-3 border-b flex gap-3 items-center transition-all hover:bg-slate-500 hover:text-white cursor-pointer hover:rounded-xl"
+                    className="px-4 py-3 border-b flex gap-3 items-center transition-all
+                     hover:bg-slate-500 hover:text-white cursor-pointer
+                     text-slate-600"
                     active={privateMemberMsg?._id == friend?._id}
                     onClick={() => handlePrivateMemberMsg(friend)}
                     disabled={friend._id === user._id}
@@ -164,6 +163,7 @@ const Sidebar = () => {
                 </div>
               );
             })}
+            {!members ? <div>You Have no friends</div> : null}
           </ul>
         </div>
       </section>
@@ -175,7 +175,7 @@ const Sidebar = () => {
         </div>
         <div>
           <MoreVertIcon
-            className="text-white cursor-pointer"
+            className=" cursor-pointer"
             onClick={handleOpenUserMenu}
           />
           <Menu
