@@ -97,7 +97,9 @@ const Signup = () => {
       try {
         const imageUrl = await uploadImage(avatar);
 
-        const response = await dispatch(signup({ ...values, avatar: imageUrl }));
+        const response = await dispatch(
+          signup({ ...values, avatar: imageUrl })
+        );
 
         if (response && response.meta.requestStatus === "rejected") {
           setSnackbarMessage("This Email Already Exists");
@@ -153,12 +155,19 @@ const Signup = () => {
       <Head>
         <title>Sign Up Page | Fast Chat</title>
       </Head>
-      <main className="flex flex-col mt-6 items-center justify-center">
-        <div className="flex gap-4 items-center">
-          <Image src={LogoImg} width={80} alt="fast chat" />
+      <main className="flex flex-col items-center justify-center min-h-screen bg-slate-800 text-white gap-2">
+        <div className=" items-center">
+          <Link href={"/"}>
+            <Image
+              src={LogoImg}
+              width={80}
+              alt="fast chat"
+              className="mx-auto"
+            />
+          </Link>
           <Typography
             variant="h1"
-            className="text-3xl font-bold text-slate-600 italic"
+            className="text-3xl font-bold text-slate-100 italic"
           >
             Sign In your Account
           </Typography>
@@ -278,7 +287,7 @@ const Signup = () => {
               Register
             </Button>
           </div>
-          <Typography variant="caption">
+          <Typography variant="caption" color={"#3d3d3d"} align="center">
             Do you have an account?{" "}
             <Link href={"/login"} className="text-indigo-600">
               Sign In

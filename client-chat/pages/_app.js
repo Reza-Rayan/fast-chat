@@ -2,9 +2,6 @@ import "@/styles/globals.css";
 import { AppContext, socket } from "@/context/appContext";
 import { useState } from "react";
 
-// Container Components
-import Header from "@/components/Header";
-
 import { ReduxProvider } from "@/redux/Provider";
 
 export default function App({ Component, pageProps }) {
@@ -34,7 +31,6 @@ export default function App({ Component, pageProps }) {
             setNewMessages,
           }}
         >
-          <Header />
           <Component {...pageProps} />
         </AppContext.Provider>
       </ReduxProvider>

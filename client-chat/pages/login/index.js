@@ -25,6 +25,8 @@ const Login = () => {
   // Define States
   const [successSnackbarOpen, setSuccessSnackbarOpen] = useState(false);
   const [successSnackbarMessage, setSuccessSnackbarMessage] = useState("");
+  const [snackBar, setSnackbar] = useState(false);
+  const [snackBarMessage, setSnackbarMessage] = useState("");
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -44,8 +46,10 @@ const Login = () => {
       try {
         // Handle form submission
         const response = await dispatch(login(values));
+        console.log(response);
         if (response && response.meta.requestStatus === "rejected") {
-          alert("email or password is wrong");
+          setSnackbar(true);
+          setSnackbarMessage("Email or Password is wrong");
         } else {
           // Show success Snackbar
           setSuccessSnackbarMessage("Registration completed successfully!");
@@ -64,24 +68,27 @@ const Login = () => {
   const handleSuccessSnackbarClose = () => {
     setSuccessSnackbarOpen(false);
   };
+  const snackBarMessageClose = () => {
+    setSnackbar(false);
+  };
   return (
     <>
       <Head>
         <title>Login Page | Fast Chat</title>
       </Head>
-      <main className="flex flex-col min-h-[700px] items-center justify-center">
+      <main className="flex flex-col items-center justify-center min-h-screen bg-slate-800 text-white gap-2">
         <Image src={LogoImg} width={80} alt="fat chat" />
         <div className="flex gap-4 items-center">
           <Typography
             variant="h1"
-            className="text-3xl font-bold text-slate-600 italic"
+            className="text-3xl font-bold text-slate-100 italic"
           >
             Sign In your Account
           </Typography>
         </div>
         <form
           onSubmit={formik.handleSubmit}
-          className="mt-4 w-[30%] mx-auto py-6 px-4 bg-white shadow-md rounded-lg flex flex-col gap-y-6"
+          className="mt-4 lg:w-[30%] w-[90%] mx-auto py-6 px-4 bg-white shadow-md rounded-lg flex flex-col gap-y-6"
         >
           <div className="flex gap-4">
             <TextField
@@ -115,13 +122,13 @@ const Login = () => {
               Sign In
             </Button>
           </div>
+          <Typography variant="caption" color={"#212121"} align="center">
+            You don't have an account?{" "}
+            <Link href={"/sign-up"} className="text-indigo-600">
+              Sign up
+            </Link>
+          </Typography>
         </form>
-        <Typography variant="caption">
-          You don't have an account?{" "}
-          <Link href={"/sign-up"} className="text-indigo-600">
-            Sign up
-          </Link>
-        </Typography>
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "left" }}
           open={successSnackbarOpen}
@@ -132,6 +139,15 @@ const Login = () => {
             style={{ backgroundColor: "#4CAF50" }}
             message={successSnackbarMessage}
           />
+        </Snackbar>
+        {/* Handle Error of email or password wrong */}
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          open={snackBar}
+          autoHideDuration={3000}
+          onClose={snackBarMessageClose}
+        >
+          <SnackbarContent message={snackBarMessage} />
         </Snackbar>
       </main>
     </>
