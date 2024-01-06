@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 // MUI Componenta
-import { Typography, Button, Box, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { PersonAdd, Login, GitHub } from "@mui/icons-material";
 
 import LogoImage from "@/public/logo.png";

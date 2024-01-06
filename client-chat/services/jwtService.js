@@ -1,16 +1,14 @@
-export const getToken = () => {
-  return localStorage.getItem("token");
+export const getToken = async () => {
+  return localStorage.getItem("accessToken");
 };
 
 export const setToken = (token) => {
-  localStorage.setItem("token", token);
+  return localStorage.setItem("token", token);
 };
 
 export const removeToken = () => {
-  localStorage.removeItem("token");
+  return localStorage.removeItem("token");
 };
-
-
 
 // Check if the token is expired
 export const isTokenExpired = () => {

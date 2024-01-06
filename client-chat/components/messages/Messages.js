@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/features/auth-slice";
 // Custom Components
-import Message from "./SingleMessage";
 import { AppContext } from "@/context/appContext";
 
 // Custom Components
 import ChatForm from "../chatForm/ChatFrom";
 import SingleMessage from "./SingleMessage";
+
+// MUI Components
+import { Button } from "@mui/material";
 
 const Messages = () => {
   const [message, setMessage] = useState("");
@@ -63,8 +66,18 @@ const Messages = () => {
       <div className="messages-output">
         {user && privateMemberMsg?._id && <></>}
         {!user && (
-          <div className="text-3xl flex flex-col justify-center min-h-[600px] text-slate-600 text-center italic font-bold opacity-80">
-            Please login
+          <div className=" flex flex-col justify-center min-h-[600px] gap-10">
+            <h2 className="text-3xl text-slate-600 text-center italic font-bold opacity-80">
+              Please login
+            </h2>
+            <Button
+              LinkComponent={"/login"}
+              color="info"
+              variant="outlined"
+              className="w-[100px] mx-auto"
+            >
+              <Link href="/login">Login</Link>
+            </Button>
           </div>
         )}
 

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { BaseURL } from "@/utils/BaseURL";
-import axiosAgent from "@/services/axiosAgent";
-import { setToken, removeToken } from "@/services/jwtService";
+  import { BaseURL } from "@/utils/BaseURL";
+  import axiosAgent from "@/services/axiosAgent";
+  import { setToken, removeToken } from "@/services/jwtService";
 
 // Define an asynchronous thunk for handling login
 export const login = createAsyncThunk("auth/login", async (body) => {
