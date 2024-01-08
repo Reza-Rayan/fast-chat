@@ -6,7 +6,7 @@ import Image from "next/image";
 import * as yup from "yup";
 import { useFormik } from "formik";
 // Logo image
-import LogoImg from "@/public/logo.png";
+import LogoImg from "../../public/logo.png";
 
 // MUI Componenta
 import {
@@ -19,7 +19,7 @@ import {
 
 //Redux Handler
 import { useDispatch } from "react-redux";
-import { login } from "@/redux/features/auth-slice";
+import { login } from "../../redux/features/auth-slice";
 
 const Login = () => {
   // Define States

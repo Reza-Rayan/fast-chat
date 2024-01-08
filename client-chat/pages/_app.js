@@ -1,8 +1,8 @@
-import "@/styles/globals.css";
-import { AppContext, socket } from "@/context/appContext";
+import "../styles/globals.css";
+import { AppContext, socket } from "../context/appContext";
 import { useState } from "react";
 
-import { ReduxProvider } from "@/redux/Provider";
+import { ReduxProvider } from "../redux/Provider";
 
 export default function App({ Component, pageProps }) {
   const [rooms, setRooms] = useState([]);

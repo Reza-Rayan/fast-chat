@@ -1,8 +1,8 @@
 import Head from "next/head";
 
 // Costom Components
-import Messages from "@/components/messages/Messages";
-import Sidebar from "@/components/sidebar/Sidebar";
+import Messages from "../../components/messages/Messages";
+import Sidebar from "../../components/sidebar/Sidebar";
 
 const Chat = () => {
   return (

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import { selectUser } from "@/redux/features/auth-slice";
+import { selectUser } from "../../redux/features/auth-slice";
 // Custom Components
-import { AppContext } from "@/context/appContext";
+import { AppContext } from "../../context/appContext";
 
 // Custom Components
 import ChatForm from "../chatForm/ChatFrom";

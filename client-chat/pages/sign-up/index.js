@@ -6,7 +6,7 @@ import Image from "next/image";
 import * as yup from "yup";
 import { useFormik } from "formik";
 // Logo image
-import LogoImg from "@/public/logo.png";
+import LogoImg from "../../public/logo.png";
 
 // MUI Componenta
 import {
@@ -28,7 +28,7 @@ import PageviewIcon from "@mui/icons-material/Pageview";
 import AddIcon from "@mui/icons-material/Add";
 
 // Redux Slices
-import { signup } from "@/redux/features/auth-slice";
+import { signup } from "../../redux/features/auth-slice";
 import { useDispatch } from "react-redux";
 
 const Signup = () => {

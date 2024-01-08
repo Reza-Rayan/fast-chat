@@ -13,12 +13,12 @@ import {
 
 // Redux Imports
 import { useSelector, useDispatch } from "react-redux";
-import { AppContext } from "@/context/appContext";
+import { AppContext } from "../../context/appContext";
 import {
   selectUser,
   resetNotifications,
   addNotifications,
-} from "@/redux/features/auth-slice";
+} from "../../redux/features/auth-slice";
 
 const settings = ["Profile", "Account", "Chat", "Logout"];
 

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { IconButton } from "@mui/material";
 import { PersonAdd, Login, GitHub } from "@mui/icons-material";
 
-import LogoImage from "@/public/logo.png";
+import LogoImage from "../public/logo.png";
 
 const Home = () => {
   return (
