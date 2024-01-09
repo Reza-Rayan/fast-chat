@@ -85,7 +85,7 @@ const Messages = () => {
           messages.map(({ _id: date, messagesByDate }, idx) => (
             <div className="overflow-y-scroll   h-[650px] relative">
               <div key={idx}>
-                <p className="alert w-[120px] mx-auto absolute z-10 left-[50%] top-0  ">
+                <p className="alert w-[120px] mx-auto sticky bg-slate-200 z-10 left-[50%] top-0">
                   {date}
                 </p>
                 {messagesByDate?.map(
