@@ -44,9 +44,9 @@ const Home = () => {
 
         <footer className="flex gap-2 items-center  absolute bottom-2 font-medium justify-center">
           See Reppository in{" "}
-          <Link href={"#"} className="transition-all hover:text-indigo-500">
+          <a target="_blank" href={"https://github.com/Reza-Rayan/fast-chat"} className="transition-all hover:text-indigo-500">
             <GitHub /> <span className="mt-10">GitHub</span>
-          </Link>
+          </a>
         </footer>
       </main>
     </>

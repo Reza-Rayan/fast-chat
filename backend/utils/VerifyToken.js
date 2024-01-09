@@ -14,8 +14,11 @@ exports.verifyToken = (req, res, next) => {
 };
 
 exports.generateAccessToken = (userId) => {
+  const expiration = 24*60*60
+
+
   return jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: "15s",
+    expiresIn:expiration,
   });
 };
 
